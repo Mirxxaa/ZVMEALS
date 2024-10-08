@@ -68,7 +68,7 @@ const Sidebar = () => {
         </li>
         <li>
           <NavLink
-            to="/vouchers"
+            to="/Vouchers"
             className={({ isActive }) => (isActive ? "active" : "")}
           >
             <FaTicketAlt className="icon" /> <span>Vouchers</span>

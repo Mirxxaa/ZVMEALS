@@ -27,6 +27,9 @@ const Items = () => {
           <img src="/dinner.jpg" alt="Dinner Icon" />
           <h3>Dinner</h3>
         </div>
+        <div className="item add-button" onClick={() => navigate("/dinner")}>
+          <button> Add Category </button>
+        </div>
       </div>
     </div>
   );

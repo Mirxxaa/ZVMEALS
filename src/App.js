@@ -17,6 +17,7 @@ import PlanItemSelection from "./components/Planitemselection";
 import Lunchmenu from "./components/Lunchmenu";
 import Dinnermenu from "./components/Dinnermenu";
 import AddItemPage from "./components/Additem";
+import Vouchers from "./components/Vouchers";
 
 const AuthenticatedLayout = ({ children }) => (
   <div
@@ -63,6 +64,7 @@ const App = () => {
                   <Route path="/delivery" element={<Delivery />} />
                   <Route path="/orders" element={<Orders />} />
                   <Route path="/users" element={<Users />} />
+                  <Route path="/Vouchers" element={<Vouchers />} />
 
                   <Route
                     path="/Planitemselection"

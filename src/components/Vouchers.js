@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-import "./Vouchers.css"; // Import your updated CSS
+import "../styles/Vouchers.css"; // Import your updated CSS
 
 const Vouchers = () => {
+  // State variables
   const [showForm, setShowForm] = useState(false);
   const [promoCode, setPromoCode] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [eligibleMembers, setEligibleMembers] = useState(""); // State for eligible members
   const [promoCodes, setPromoCodes] = useState([]);
+
+  // Get today's date in YYYY-MM-DD format for the min attribute
+  const today = new Date().toISOString().split("T")[0];
 
   // Function to handle form submission
   const handleSubmit = (e) => {
@@ -17,6 +22,7 @@ const Vouchers = () => {
       promoCode,
       startDate,
       endDate,
+      eligibleMembers: parseInt(eligibleMembers), // Convert to number
       isActive: true, // Set the new promo code as active by default
     };
 
@@ -27,6 +33,7 @@ const Vouchers = () => {
     setPromoCode("");
     setStartDate("");
     setEndDate("");
+    setEligibleMembers(""); // Clear the eligible members field
   };
 
   // Function to toggle the active/inactive state of a promo code
@@ -52,7 +59,10 @@ const Vouchers = () => {
       <h1>Discount Vouchers</h1>
 
       {!showForm && (
-        <button className="add-promo-btn" onClick={handleAddPromoCodeClick}>
+        <button
+          className="add-promo-btn global-btn"
+          onClick={handleAddPromoCodeClick}
+        >
           Add Promo Code
         </button>
       )}
@@ -78,6 +88,7 @@ const Vouchers = () => {
               id="startDate"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
+              min={today} // Set minimum date to today
               required
             />
           </div>
@@ -89,6 +100,22 @@ const Vouchers = () => {
               id="endDate"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
+              min={today} // Set minimum date to today
+              required
+            />
+          </div>
+
+          {/* New field for Number of Members Eligible */}
+          <div className="form-group">
+            <label htmlFor="eligibleMembers">Number of Members Eligible</label>
+            <input
+              type="number"
+              id="eligibleMembers"
+              value={eligibleMembers}
+              onChange={(e) => setEligibleMembers(e.target.value)}
+              placeholder="Enter number of members"
+              min="1"
+              max="100" // Limit the maximum members to 100
               required
             />
           </div>
@@ -108,7 +135,7 @@ const Vouchers = () => {
               <li key={index} className="promo-code-item">
                 <span>
                   {promo.promoCode} - Valid from {promo.startDate} to{" "}
-                  {promo.endDate}
+                  {promo.endDate} - Eligible Members: {promo.eligibleMembers}
                 </span>
                 <div className="actions">
                   <label className="switch">
